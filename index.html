@@ -57,17 +57,17 @@
     .btn-secondary { font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--text); border:1px solid var(--border); padding:14px 32px; border-radius:4px; text-decoration:none; letter-spacing:0.06em; text-transform:uppercase; transition:all 0.2s; }
     .btn-secondary:hover { border-color:var(--accent); color:var(--accent); }
 
-    /* HERO PHOTO — transparent PNG, no frame, no background */
+    /* HERO PHOTO — Adjusted size to make it larger */
     .hero-photo-wrap {
       position:relative; z-index:2; flex-shrink:0;
-      width:340px; height:440px;
+      width:480px; height:580px; /* Increased from 340x440 */
       opacity:0; animation:fadeLeft 0.9s 0.9s forwards;
     }
     .hero-photo {
       width:100%; height:100%;
       object-fit:contain; object-position:bottom center;
       display:block;
-      filter: drop-shadow(0 0 40px rgba(0,229,255,0.18));
+      filter: drop-shadow(0 0 50px rgba(0,229,255,0.25)); /* Enhanced glow */
     }
     .hero-photo-placeholder {
       width:100%; height:100%;
@@ -75,11 +75,10 @@
     }
     .hero-photo-placeholder span:first-child { font-size:5rem; opacity:0.15; }
     .hero-photo-placeholder span:last-child { font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--muted); letter-spacing:0.08em; text-align:center; }
-    /* subtle glow under the photo */
     .hero-photo-wrap::after {
       content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%);
-      width:60%; height:30px;
-      background:radial-gradient(ellipse,rgba(0,229,255,0.22),transparent 70%);
+      width:70%; height:40px;
+      background:radial-gradient(ellipse,rgba(0,229,255,0.3),transparent 70%);
       pointer-events:none;
     }
 
@@ -106,11 +105,12 @@
     .about-link { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--muted); border:1px solid var(--border); padding:10px 20px; border-radius:4px; text-decoration:none; letter-spacing:0.06em; text-transform:uppercase; transition:all 0.2s; }
     .about-link:hover { border-color:var(--accent); color:var(--accent); }
 
-    /* ABOUT PHOTO — circular spinning border, perfectly centred */
+    /* ABOUT PHOTO — Alignment fixed */
     .about-photo-wrap {
       position:relative;
       width:220px; height:220px;
-      flex-shrink:0; align-self:center;
+      flex-shrink:0; 
+      align-self: flex-start; /* Changed from center to align perfectly with left-aligned text */
     }
     .about-photo-wrap::before {
       content:''; position:absolute;
@@ -127,7 +127,9 @@
     .about-photo {
       position:absolute; inset:6px;
       width:calc(100% - 12px); height:calc(100% - 12px);
-      border-radius:50%; object-fit:cover; object-position:top center;
+      border-radius:50%; 
+      object-fit:cover; 
+      object-position:center; /* Fixed cropping issue */
       z-index:2; display:block;
     }
     .about-photo-placeholder {
@@ -179,21 +181,22 @@
     #projects { background:var(--surface); }
     .projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:24px; }
 
-    /* Card hidden state for "show more" */
     .project-card { background:var(--card-bg); border:1px solid var(--border); border-radius:10px; overflow:hidden; transition:all 0.3s; cursor:pointer; position:relative; display:flex; flex-direction:column; }
     .project-card.hidden-project { display:none; }
     .project-card.hidden-project.revealed { display:flex; animation:fadeUp 0.5s forwards; }
     .project-card:hover { transform:translateY(-6px); border-color:rgba(0,229,255,0.2); box-shadow:0 20px 60px rgba(0,0,0,0.5); }
 
-    /* SHOW MORE button */
     .show-more-wrap { text-align:center; margin-top:40px; }
     .show-more-btn { font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--accent); border:1px solid rgba(0,229,255,0.35); background:transparent; padding:14px 36px; border-radius:4px; cursor:pointer; letter-spacing:0.08em; text-transform:uppercase; transition:all 0.2s; }
     .show-more-btn:hover { background:rgba(0,229,255,0.08); border-color:var(--accent); }
 
-    /* GALLERY — 16:9 with position:absolute trick so images never mis-align */
+    /* GALLERY */
     .project-gallery { position:relative; width:100%; padding-top:56.25%; overflow:hidden; flex-shrink:0; background:var(--surface2); }
     .gallery-track { position:absolute; top:0; left:0; width:100%; height:100%; display:flex; transition:transform 0.4s ease; }
-    .gallery-img { min-width:100%; width:100%; height:100%; object-fit:cover; object-position:center; display:block; flex-shrink:0; }
+    
+    /* Fixed Image Cropping for Projects */
+    .gallery-img { min-width:100%; width:100%; height:100%; object-fit:contain; object-position:center; display:block; flex-shrink:0; background: var(--surface2); }
+    
     .gallery-placeholder { min-width:100%; flex-shrink:0; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; }
     .gallery-placeholder .ph-icon { font-size:2.4rem; opacity:0.2; }
     .gallery-placeholder .ph-text { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--muted); letter-spacing:0.08em; opacity:0.6; }
@@ -204,7 +207,6 @@
     .gallery-btn { pointer-events:all; background:rgba(6,8,16,0.75); border:1px solid var(--border); color:var(--text); width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:border-color 0.2s; }
     .gallery-btn:hover { border-color:var(--accent); color:var(--accent); }
 
-    /* PROJECT BODY */
     .project-body { padding:22px; flex:1; display:flex; flex-direction:column; }
     .project-num { font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--accent); opacity:0.5; margin-bottom:8px; }
     .project-title { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--heading); margin-bottom:10px; line-height:1.3; }
@@ -224,7 +226,7 @@
     .modal { background:var(--surface); border:1px solid rgba(255,255,255,0.1); border-radius:16px; max-width:680px; width:100%; max-height:90vh; overflow-y:auto; transform:translateY(30px); transition:transform 0.3s; position:relative; }
     .modal-overlay.active .modal { transform:translateY(0); }
     .modal-img-wrap { width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:16px 16px 0 0; background:var(--surface2); display:flex; align-items:center; justify-content:center; }
-    .modal-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+    .modal-img-wrap img { width:100%; height:100%; object-fit:contain; display:block; }
     .modal-img-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; width:100%; height:100%; }
     .modal-img-placeholder span:first-child { font-size:4rem; opacity:0.2; }
     .modal-body { padding:32px; }
@@ -302,10 +304,14 @@
       nav { padding:16px 24px; } nav.scrolled { padding:12px 24px; } .nav-links { display:none; }
       #hero { flex-direction:column-reverse; align-items:center; text-align:center; padding:100px 24px 60px; gap:24px; }
       .hero-content { max-width:100%; } .hero-tag { justify-content:center; } .hero-btns { justify-content:center; }
-      .hero-photo-wrap { width:200px; height:260px; }
+      
+      /* Mobile Hero Size Tweaked */
+      .hero-photo-wrap { width:300px; height:380px; }
+      
       .container { padding-left:24px; padding-right:24px; }
       .about-grid,.skills-layout,.contact-grid { grid-template-columns:1fr; gap:40px; }
-      .about-left { align-items:center; }
+      .about-left { align-items:center; text-align: center; } /* Centers everything on mobile */
+      .about-photo-wrap { align-self: center; } /* Centers the photo on mobile layout */
       .projects-grid { grid-template-columns:1fr; }
       footer { flex-direction:column; gap:16px; text-align:center; }
     }
@@ -319,7 +325,6 @@
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
 
-  <!-- MODAL -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <button class="modal-close" onclick="closeModal()">&#10005;</button>
@@ -334,7 +339,6 @@
     </div>
   </div>
 
-  <!-- NAV -->
   <nav id="navbar">
     <div class="nav-logo">G<span>.</span>Ramanayake</div>
     <ul class="nav-links">
@@ -347,7 +351,6 @@
     <a href="mailto:gayururamanayake@gmail.com" class="nav-cta">Hire Me</a>
   </nav>
 
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-content">
       <div class="hero-tag">Available for opportunities</div>
@@ -360,8 +363,6 @@
       </div>
     </div>
 
-    <!-- HERO PHOTO: transparent PNG, no frame, no background box -->
-    <!-- Put photo.png (transparent background) in the same folder -->
     <div class="hero-photo-wrap">
       <img src="photo.png" alt="Gayuru Ramanayake" class="hero-photo"
         onerror="this.style.display='none'; document.getElementById('heroFallback').style.display='flex';">
@@ -377,7 +378,6 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="container">
       <div class="section-tag">Introduction</div>
@@ -385,7 +385,6 @@
       <div class="about-grid">
 
         <div class="about-left reveal">
-          <!-- Circular spinning border photo — photo.jpeg -->
           <div class="about-photo-wrap">
             <img src="photo.jpeg" alt="Gayuru Ramanayake" class="about-photo"
               onerror="this.style.display='none'; document.getElementById('aboutFallback').style.display='flex';">
@@ -416,7 +415,6 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE & EDUCATION -->
   <section id="experience">
     <div class="container">
       <div class="section-tag">Career &amp; Academics</div>
@@ -447,23 +445,18 @@
     </div>
   </section>
 
-  <!-- PROJECTS — first 6 visible, 7th hidden behind Show More -->
   <section id="projects">
     <div class="container">
       <div class="section-tag">Portfolio</div>
       <h2 class="section-title">Featured <span class="dim">Projects</span></h2>
       <div class="projects-grid">
 
-        <!-- PROJECT 1: VLM — HAS PHOTOS -->
         <div class="project-card reveal" onclick="openModal('vlm')">
           <div class="project-badge red">Ongoing</div>
           <div class="project-gallery" id="gallery-vlm">
             <div class="gallery-track" id="track-vlm">
-             
-              <img src="vlm1.jpeg" class="gallery-img" alt="VLM Project">
-              <img src="vlm2.jpeg" class="gallery-img" alt="VLM Project">
-             
-              <div class="gallery-placeholder"><span class="ph-icon">🤖</span><span class="ph-text">vlm1.jpeg · vlm2.jpeg</span></div>
+              <img src="vlm1.jpeg" class="gallery-img" alt="VLM Project" onerror="this.style.display='none'">
+              <img src="vlm2.jpeg" class="gallery-img" alt="VLM Project" onerror="this.style.display='none'">
             </div>
             <div class="gallery-arrows">
               <button class="gallery-btn" onclick="event.stopPropagation();slideGallery('vlm',-1)">&#8249;</button>
@@ -482,17 +475,13 @@
           </div>
         </div>
 
-        <!-- PROJECT 2: MAZE — HAS PHOTOS -->
         <div class="project-card reveal" onclick="openModal('maze')">
           <div class="project-badge green">&#127942; 1st Place</div>
           <div class="project-gallery" id="gallery-maze">
             <div class="gallery-track" id="track-maze">
-              
-              <img src="maze1.jpeg" class="gallery-img" alt="Maze Robot">
-              <img src="maze2.jpeg" class="gallery-img" alt="Maze Robot">
-              <!-- <img src="maze3.jpeg" class="gallery-img" alt="Maze Robot"> -->
-             
-              <div class="gallery-placeholder"><span class="ph-icon">&#127942;</span><span class="ph-text">maze1.jpeg · maze2.jpeg · maze3.jpeg</span></div>
+              <img src="maze1.jpeg" class="gallery-img" alt="Maze Robot" onerror="this.style.display='none'">
+              <img src="maze2.jpeg" class="gallery-img" alt="Maze Robot" onerror="this.style.display='none'">
+              <img src="maze3.jpeg" class="gallery-img" alt="Maze Robot" onerror="this.style.display='none'">
             </div>
             <div class="gallery-arrows">
               <button class="gallery-btn" onclick="event.stopPropagation();slideGallery('maze',-1)">&#8249;</button>
@@ -511,7 +500,6 @@
           </div>
         </div>
 
-        <!-- PROJECT 3: FIRE — no photo yet -->
         <div class="project-card reveal" onclick="openModal('fire')">
           <div class="project-gallery">
             <div class="gallery-track">
@@ -529,7 +517,6 @@
           </div>
         </div>
 
-        <!-- PROJECT 4: POTATO — no photo yet -->
         <div class="project-card reveal" onclick="openModal('potato')">
           <div class="project-gallery">
             <div class="gallery-track">
@@ -547,7 +534,6 @@
           </div>
         </div>
 
-        <!-- PROJECT 5: MEDIBOX — no photo yet -->
         <div class="project-card reveal" onclick="openModal('medibox')">
           <div class="project-gallery">
             <div class="gallery-track">
@@ -565,7 +551,6 @@
           </div>
         </div>
 
-        <!-- PROJECT 6: VEHICLE — no photo yet -->
         <div class="project-card reveal" onclick="openModal('vehicle')">
           <div class="project-gallery">
             <div class="gallery-track">
@@ -583,7 +568,6 @@
           </div>
         </div>
 
-        <!-- PROJECT 7: CAMERA — hidden behind Show More -->
         <div class="project-card hidden-project" onclick="openModal('camera')">
           <div class="project-gallery">
             <div class="gallery-track">
@@ -603,7 +587,6 @@
 
       </div>
 
-      <!-- SHOW MORE -->
       <div class="show-more-wrap">
         <button class="show-more-btn" id="showMoreBtn" onclick="showMoreProjects()">
           Show More Projects &#8595;
@@ -613,7 +596,6 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills">
     <div class="container">
       <div class="section-tag">Capabilities</div>
@@ -642,7 +624,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <div class="section-tag">Get In Touch</div>
@@ -766,7 +747,13 @@
     const galleryState = {};
     function initGallery(id) {
       const track = document.getElementById('track-' + id); if (!track) return;
-      const count = track.children.length;
+      
+      // Filter out elements that aren't actually images (e.g. placeholder text if it's there)
+      const images = Array.from(track.children).filter(child => child.tagName === 'IMG');
+      
+      if (images.length === 0) return; // if no images, skip
+      
+      const count = images.length;
       galleryState[id] = { index: 0, count };
       const dots = document.getElementById('dots-' + id);
       if (dots && count > 1) {
@@ -776,6 +763,10 @@
           d.onclick = e => { e.stopPropagation(); goToSlide(id, i); };
           dots.appendChild(d);
         }
+      } else {
+        // hide arrows if 1 or 0 images
+        const arrows = track.parentElement.querySelector('.gallery-arrows');
+        if(arrows) arrows.style.display = 'none';
       }
     }
     function goToSlide(id, index) {
