@@ -65,8 +65,7 @@
     .about-links { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
     .about-link { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); border: 1px solid var(--border); padding: 10px 20px; border-radius: 4px; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
     .about-link:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* PHOTO — placeholder is hidden by default, only shown via onerror */
+    /* PHOTO */
     .about-photo-wrap { position: relative; width: 220px; height: 220px; flex-shrink: 0; }
     .about-photo-wrap::before { content: ''; position: absolute; inset: -3px; border-radius: 50%; background: conic-gradient(var(--accent), var(--accent2), var(--accent)); animation: spinBorder 4s linear infinite; z-index: 0; }
     @keyframes spinBorder { to { transform: rotate(360deg); } }
@@ -75,7 +74,6 @@
     .about-photo-placeholder { display: none; position: absolute; top: 6px; left: 6px; width: calc(100% - 12px); height: calc(100% - 12px); border-radius: 50%; background: var(--surface2); z-index: 2; flex-direction: column; align-items: center; justify-content: center; border: 1px dashed rgba(0,229,255,0.3); }
     .about-photo-placeholder span:first-child { font-size: 2.5rem; }
     .about-photo-placeholder span:last-child { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--accent); letter-spacing: 0.08em; margin-top: 6px; text-align: center; padding: 0 12px; }
-
     .about-card-group { display: flex; flex-direction: column; gap: 16px; }
     .info-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 24px 28px; transition: border-color 0.3s, transform 0.3s; }
     .info-card:hover { border-color: rgba(0,229,255,0.3); transform: translateX(6px); }
@@ -121,18 +119,23 @@
     .project-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); padding: 3px 9px; border-radius: 3px; }
     .project-badge { position: absolute; top: 20px; right: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; background: rgba(255,107,107,0.15); color: var(--accent3); border: 1px solid rgba(255,107,107,0.3); padding: 3px 10px; border-radius: 3px; }
     .project-badge.green { background: rgba(0,229,255,0.1); color: var(--accent); border-color: rgba(0,229,255,0.3); }
-    .project-gallery { margin-bottom: 18px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); position: relative; }
-    .gallery-track { display: flex; transition: transform 0.4s ease; }
-    .gallery-img { min-width: 100%; height: 180px; object-fit: cover; display: block; background: var(--surface2); }
-    .gallery-placeholder { min-width: 100%; height: 180px; background: var(--surface2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-    .gallery-placeholder span:first-child { font-size: 2rem; opacity: 0.4; }
-    .gallery-placeholder span:last-child { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.08em; }
-    .gallery-nav { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+
+    /* =====================================================
+       GALLERY — 3 rules make it work:
+       1. .project-gallery has overflow: hidden  (clips slides)
+       2. .gallery-track is display:flex with no wrapping
+       3. .gallery-img has flex: 0 0 100% (never shrinks)
+    ===================================================== */
+    .project-gallery { position: relative; margin-bottom: 18px; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; width: 100%; }
+    .gallery-track { display: flex; flex-wrap: nowrap; transition: transform 0.4s ease; will-change: transform; }
+    .gallery-img { flex: 0 0 100%; width: 100%; height: 200px; object-fit: cover; object-position: center; display: block; }
+    .gallery-nav { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2; }
     .gallery-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: background 0.2s; border: none; padding: 0; }
     .gallery-dot.active { background: var(--accent); }
-    .gallery-arrows { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 8px; pointer-events: none; }
-    .gallery-btn { pointer-events: all; background: rgba(6,8,16,0.7); border: 1px solid var(--border); color: var(--text); width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
-    .gallery-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .gallery-arrows { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 8px; pointer-events: none; z-index: 2; }
+    .gallery-btn { pointer-events: all; background: rgba(6,8,16,0.75); border: 1px solid rgba(255,255,255,0.15); color: #fff; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; line-height: 1; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, background 0.2s; }
+    .gallery-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(6,8,16,0.95); }
+
     #skills { background: var(--bg); }
     .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
     .skill-group { margin-bottom: 40px; }
@@ -181,6 +184,7 @@
       nav { padding: 16px 24px; } nav.scrolled { padding: 12px 24px; } .nav-links { display: none; }
       #hero, .container { padding-left: 24px; padding-right: 24px; }
       .about-grid, .skills-layout, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-left { align-items: center; }
       footer { flex-direction: column; gap: 16px; text-align: center; }
     }
   </style>
@@ -227,33 +231,26 @@
       <h2 class="section-title">About <span class="dim">Me</span></h2>
       <div class="about-grid">
         <div class="about-left reveal">
-
-          <!-- PHOTO: make sure photo.jpeg is in the same folder as index.html -->
+          <!-- photo.jpeg must be in the same folder as index.html -->
           <div class="about-photo-wrap">
-            <img
-              src="photo.jpeg"
-              alt="Gayuru Ramanayake"
-              class="about-photo"
-              onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';"
-            >
+            <img src="photo.jpeg" alt="Gayuru Ramanayake" class="about-photo"
+              onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';">
             <div class="about-photo-placeholder" id="photoFallback">
-              <span>👤</span>
+              <span>&#128100;</span>
               <span>photo.jpeg not found</span>
             </div>
           </div>
-
           <div class="about-text">
             <p>I'm an enthusiastic final-year <strong>Electrical Engineering</strong> undergraduate at the University of Moratuwa, Sri Lanka, with a CGPA of 3.69 and two Dean's List recognitions including a <strong>perfect 4.0 GPA</strong> in Semester 6.</p>
             <p>Recently completed a <strong>6-month AI/ML internship at Jaseci Labs</strong>, where I contributed to vision-language model fine-tuning, backend architecture, and cloud deployment using Docker &amp; Kubernetes.</p>
             <p>Alongside engineering, I'm pursuing <strong>CIMA</strong> (Management Level) to bridge technology with strategic business thinking. I believe the best solutions live at the intersection of deep technical knowledge and business awareness.</p>
             <div class="about-links">
-              <a href="https://github.com/GayuruRamanayake" class="about-link" target="_blank">⌥ GitHub</a>
-              <a href="https://www.linkedin.com/in/gayuru-ramanayake-5141532a5/" class="about-link" target="_blank">⌘ LinkedIn</a>
-              <a href="mailto:gayururamanayake@gmail.com" class="about-link">✉ Email</a>
+              <a href="https://github.com/GayuruRamanayake" class="about-link" target="_blank">&#8997; GitHub</a>
+              <a href="https://www.linkedin.com/in/gayuru-ramanayake-5141532a5/" class="about-link" target="_blank">in LinkedIn</a>
+              <a href="mailto:gayururamanayake@gmail.com" class="about-link">&#9993; Email</a>
             </div>
           </div>
         </div>
-
         <div class="about-card-group reveal">
           <div class="info-card"><div class="info-card-label">Location</div><div class="info-card-value">Pallewela, Sri Lanka</div><div class="info-card-sub">Open to remote / relocation</div></div>
           <div class="info-card"><div class="info-card-label">Current Status</div><div class="info-card-value">Final-Year Undergraduate</div><div class="info-card-sub">University of Moratuwa · 2022 – present</div></div>
@@ -286,10 +283,10 @@
         </div>
       </div>
       <div class="edu-grid">
-        <div class="edu-card reveal"><div class="edu-icon">🎓</div><div class="edu-degree">B.Sc Engineering (Hons) – Electrical Engineering</div><div class="edu-inst">University of Moratuwa</div><div class="edu-year">2022 – present</div><div class="edu-detail">CGPA: 3.69 / 4.00</div><span class="badge">Dean's List: Sem 4 &amp; Sem 6 (4.0/4.0)</span></div>
-        <div class="edu-card reveal"><div class="edu-icon">📊</div><div class="edu-degree">CIMA – Chartered Institute of Management Accountants</div><div class="edu-inst">CIMA Global</div><div class="edu-year">Reading Management Level</div><div class="edu-detail">Diploma in Management Accounting (Operational Level ✓) · Certificate Level ✓</div><span class="badge">Credential ID: 1-6AIHZSZ</span></div>
-        <div class="edu-card reveal"><div class="edu-icon">📐</div><div class="edu-degree">GCE Advanced Level</div><div class="edu-inst">Bandaranayake College, Gampaha</div><div class="edu-year">2020</div><div class="edu-detail">Mathematics – A | Physics – A | Chemistry – A</div><span class="badge">Z-score: 2.2172</span></div>
-        <div class="edu-card reveal"><div class="edu-icon">🏫</div><div class="edu-degree">GCE Ordinary Level</div><div class="edu-inst">Bandaranayake College, Gampaha</div><div class="edu-year">2017</div><div class="edu-detail">9A passes across all subjects</div><span class="badge">9A's</span></div>
+        <div class="edu-card reveal"><div class="edu-icon">&#127891;</div><div class="edu-degree">B.Sc Engineering (Hons) – Electrical Engineering</div><div class="edu-inst">University of Moratuwa</div><div class="edu-year">2022 – present</div><div class="edu-detail">CGPA: 3.69 / 4.00</div><span class="badge">Dean's List: Sem 4 &amp; Sem 6 (4.0/4.0)</span></div>
+        <div class="edu-card reveal"><div class="edu-icon">&#128202;</div><div class="edu-degree">CIMA – Chartered Institute of Management Accountants</div><div class="edu-inst">CIMA Global</div><div class="edu-year">Reading Management Level</div><div class="edu-detail">Diploma in Management Accounting (Operational Level ✓) · Certificate Level ✓</div><span class="badge">Credential ID: 1-6AIHZSZ</span></div>
+        <div class="edu-card reveal"><div class="edu-icon">&#128208;</div><div class="edu-degree">GCE Advanced Level</div><div class="edu-inst">Bandaranayake College, Gampaha</div><div class="edu-year">2020</div><div class="edu-detail">Mathematics – A | Physics – A | Chemistry – A</div><span class="badge">Z-score: 2.2172</span></div>
+        <div class="edu-card reveal"><div class="edu-icon">&#127983;</div><div class="edu-degree">GCE Ordinary Level</div><div class="edu-inst">Bandaranayake College, Gampaha</div><div class="edu-year">2017</div><div class="edu-detail">9A passes across all subjects</div><span class="badge">9A's</span></div>
       </div>
     </div>
   </section>
@@ -299,16 +296,21 @@
       <div class="section-tag">Portfolio</div>
       <h2 class="section-title">Featured <span class="dim">Projects</span></h2>
       <div class="projects-grid">
+
+        <!-- PROJECT 1: VLM
+             IMPORTANT: Only <img> tags go inside gallery-track.
+             No placeholder divs. No other elements. -->
         <div class="project-card reveal">
           <div class="project-badge">Ongoing</div>
           <div class="project-gallery" id="gallery-vlm">
             <div class="gallery-track" id="track-vlm">
-              <!-- Remove comment tags below & add vlm1.jpeg etc to same folder when ready -->
-              <img src="vlm1.jpeg" class="gallery-img" alt="VLM Project">
-              <img src="vlm2.jpeg" class="gallery-img" alt="VLM Project">
-              <div class="gallery-placeholder"><span>🤖</span><span>Add vlm1.jpeg, vlm2.jpeg</span></div>
+              <img src="vlm1.jpeg" class="gallery-img" alt="VLM Project 1">
+              <img src="vlm2.jpeg" class="gallery-img" alt="VLM Project 2">
             </div>
-            <div class="gallery-arrows"><button class="gallery-btn" onclick="slideGallery('vlm',-1)">&#8249;</button><button class="gallery-btn" onclick="slideGallery('vlm',1)">&#8250;</button></div>
+            <div class="gallery-arrows">
+              <button class="gallery-btn" onclick="slideGallery('vlm',-1)">&#8249;</button>
+              <button class="gallery-btn" onclick="slideGallery('vlm',1)">&#8250;</button>
+            </div>
             <div class="gallery-nav" id="dots-vlm"></div>
           </div>
           <div class="project-num">01 / Final Year Research</div>
@@ -316,17 +318,19 @@
           <div class="project-desc">Real-time assistive navigation system using Vision-Language Models on NVIDIA Jetson for semantic scene understanding, obstacle awareness, and audio feedback for independent mobility.</div>
           <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">VLMs</span><span class="project-tag">NVIDIA Jetson</span><span class="project-tag">PyTorch</span><span class="project-tag">TTS/STT</span></div>
         </div>
+
+        <!-- PROJECT 2: MAZE -->
         <div class="project-card reveal">
           <div class="project-badge green">&#127942; 1st Place</div>
           <div class="project-gallery" id="gallery-maze">
             <div class="gallery-track" id="track-maze">
-              <!-- Remove comment tags below & add maze1.jpeg etc to same folder when ready -->
-              <img src="maze1.jpeg" class="gallery-img" alt="Maze Robot">
-              <img src="maze2.jpeg" class="gallery-img" alt="Maze Robot">
-              <!-- <img src="maze3.jpeg" class="gallery-img" alt="Maze Robot"> -->
-              <div class="gallery-placeholder"><span>&#129302;</span><span>Add maze1.jpeg, maze2.jpeg, maze3.jpeg</span></div>
+              <img src="maze1.jpeg" class="gallery-img" alt="Maze Robot 1">
+              <img src="maze2.jpeg" class="gallery-img" alt="Maze Robot 2">
             </div>
-            <div class="gallery-arrows"><button class="gallery-btn" onclick="slideGallery('maze',-1)">&#8249;</button><button class="gallery-btn" onclick="slideGallery('maze',1)">&#8250;</button></div>
+            <div class="gallery-arrows">
+              <button class="gallery-btn" onclick="slideGallery('maze',-1)">&#8249;</button>
+              <button class="gallery-btn" onclick="slideGallery('maze',1)">&#8250;</button>
+            </div>
             <div class="gallery-nav" id="dots-maze"></div>
           </div>
           <div class="project-num">02 / Competition Winner</div>
@@ -334,30 +338,35 @@
           <div class="project-desc">Champion at Maze Solver Challenge 2025. Hybrid navigation using Flood Fill + BFS, dual-mode PID control, custom 3D-printed chassis, and real-time environment mapping with ultrasonic/IR sensors.</div>
           <div class="project-tags"><span class="project-tag">C++</span><span class="project-tag">Arduino Mega</span><span class="project-tag">Flood Fill</span><span class="project-tag">BFS</span><span class="project-tag">PID</span></div>
         </div>
+
         <div class="project-card reveal">
           <div class="project-num">03 / AI + Sensors</div>
           <div class="project-title">Smart Fire Detection &amp; Mitigation System</div>
           <div class="project-desc">Real-time fire detection combining Haar Cascade computer vision with flame/temperature/gas sensors. Integrated LabVIEW dashboard with automated actuators via TCP/IP.</div>
           <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">OpenCV</span><span class="project-tag">LabVIEW</span><span class="project-tag">TCP/IP</span></div>
         </div>
+
         <div class="project-card reveal">
           <div class="project-num">04 / Deep Learning</div>
           <div class="project-title">Potato Disease Detection System</div>
           <div class="project-desc">CNN-based plant disease classification using TensorFlow with data augmentation. Full-stack deployment with FastAPI backend and React frontend.</div>
           <div class="project-tags"><span class="project-tag">TensorFlow</span><span class="project-tag">CNN</span><span class="project-tag">FastAPI</span><span class="project-tag">React</span></div>
         </div>
+
         <div class="project-card reveal">
           <div class="project-num">05 / Embedded IoT</div>
           <div class="project-title">Smart Medibox: Automated Medicine Storage</div>
           <div class="project-desc">Intelligent medicine box that auto-adjusts a sliding window based on light conditions using servo + light sensor, with a real-time Node-RED monitoring dashboard over MQTT.</div>
           <div class="project-tags"><span class="project-tag">Arduino</span><span class="project-tag">Node-RED</span><span class="project-tag">MQTT</span></div>
         </div>
+
         <div class="project-card reveal">
           <div class="project-num">06 / Full-Stack</div>
           <div class="project-title">Logistic Vehicle Maintenance Subsystem</div>
           <div class="project-desc">Led as Scrum Master and Backend Developer. Built fleet maintenance REST APIs with Spring Boot + React frontend, managing Agile workflows in Jira.</div>
           <div class="project-tags"><span class="project-tag">Java</span><span class="project-tag">Spring Boot</span><span class="project-tag">React</span><span class="project-tag">Jira</span></div>
         </div>
+
       </div>
     </div>
   </section>
@@ -426,7 +435,8 @@
   </footer>
 
   <script>
-    const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    // Cursor
+    const cursor = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
     let mx=0,my=0,rx=0,ry=0;
     document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
     function animateRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animateRing);}
@@ -435,15 +445,76 @@
       el.addEventListener('mouseenter',()=>{cursor.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.width='60px';ring.style.height='60px';});
       el.addEventListener('mouseleave',()=>{cursor.style.transform='translate(-50%,-50%) scale(1)';ring.style.width='36px';ring.style.height='36px';});
     });
+
+    // Navbar
     window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50));
+
+    // Reveal on scroll
     const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});
     document.querySelectorAll('.reveal,.timeline-item').forEach(el=>observer.observe(el));
-    function handleSubmit(e){e.preventDefault();const btn=e.target.querySelector('.form-submit');btn.textContent='Message Sent';btn.style.background='#00e5ff';setTimeout(()=>{btn.textContent='Send Message';e.target.reset();},3000);}
-    const galleryState={};
-    function initGallery(id){const track=document.getElementById('track-'+id);if(!track)return;const count=track.children.length;galleryState[id]={index:0,count};const dc=document.getElementById('dots-'+id);if(dc&&count>1){for(let i=0;i<count;i++){const d=document.createElement('button');d.className='gallery-dot'+(i===0?' active':'');d.onclick=()=>goToSlide(id,i);dc.appendChild(d);}}}
-    function goToSlide(id,index){const s=galleryState[id];if(!s)return;s.index=(index+s.count)%s.count;document.getElementById('track-'+id).style.transform='translateX(-'+(s.index*100)+'%)';document.querySelectorAll('#dots-'+id+' .gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===s.index));}
-    function slideGallery(id,dir){const s=galleryState[id];if(s)goToSlide(id,s.index+dir);}
-    initGallery('vlm');initGallery('maze');
+
+    // Contact form
+    function handleSubmit(e){
+      e.preventDefault();
+      const btn=e.target.querySelector('.form-submit');
+      btn.textContent='Message Sent ✓';
+      btn.style.background='#00e5ff';
+      setTimeout(()=>{btn.textContent='Send Message →';e.target.reset();},3000);
+    }
+
+    // ─────────────────────────────────────────────
+    // GALLERY
+    // How it works:
+    //   - gallery-track is a flex row of images
+    //   - each image is flex: 0 0 100% (never shrinks)
+    //   - we move the track left by (index * 100%)
+    //   - overflow:hidden on the wrapper hides the rest
+    // ─────────────────────────────────────────────
+    const galleryState = {};
+
+    function initGallery(id) {
+      const track = document.getElementById('track-' + id);
+      if (!track) return;
+      const imgs = track.querySelectorAll('.gallery-img');
+      const count = imgs.length;
+      if (count === 0) return;
+      galleryState[id] = { index: 0, count };
+
+      // Build dot indicators
+      const dotsEl = document.getElementById('dots-' + id);
+      if (dotsEl) {
+        dotsEl.innerHTML = '';
+        if (count > 1) {
+          for (let i = 0; i < count; i++) {
+            const d = document.createElement('button');
+            d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+            d.setAttribute('aria-label', 'Go to slide ' + (i+1));
+            d.onclick = () => goToSlide(id, i);
+            dotsEl.appendChild(d);
+          }
+        }
+      }
+
+      // Hide arrow buttons if only 1 image
+      const arrowsEl = document.querySelector('#gallery-' + id + ' .gallery-arrows');
+      if (arrowsEl && count <= 1) arrowsEl.style.display = 'none';
+    }
+
+    function goToSlide(id, index) {
+      const s = galleryState[id];
+      if (!s) return;
+      s.index = ((index % s.count) + s.count) % s.count;
+      document.getElementById('track-' + id).style.transform = 'translateX(-' + (s.index * 100) + '%)';
+      document.querySelectorAll('#dots-' + id + ' .gallery-dot').forEach((d, i) => d.classList.toggle('active', i === s.index));
+    }
+
+    function slideGallery(id, dir) {
+      const s = galleryState[id];
+      if (s) goToSlide(id, s.index + dir);
+    }
+
+    initGallery('vlm');
+    initGallery('maze');
   </script>
 </body>
 </html>
