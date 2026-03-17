@@ -467,6 +467,86 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
+    /* PHOTO */
+    .about-photo-wrap {
+      position: relative; width: 220px; height: 220px; flex-shrink: 0;
+    }
+    .about-photo-wrap::before {
+      content: ''; position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent), var(--accent2), var(--accent));
+      animation: spinBorder 4s linear infinite;
+      z-index: 0;
+    }
+    @keyframes spinBorder { to { transform: rotate(360deg); } }
+    .about-photo-wrap::after {
+      content: ''; position: absolute; inset: 2px;
+      border-radius: 50%; background: var(--surface); z-index: 1;
+    }
+    .about-photo {
+      position: absolute; inset: 6px; border-radius: 50%;
+      object-fit: cover; width: calc(100% - 12px); height: calc(100% - 12px);
+      z-index: 2; display: block;
+    }
+    .about-photo-placeholder {
+      position: absolute; inset: 6px; border-radius: 50%;
+      background: var(--surface2); z-index: 2;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      border: 1px dashed rgba(0,229,255,0.3);
+    }
+    .about-photo-placeholder span:first-child { font-size: 2.5rem; }
+    .about-photo-placeholder span:last-child {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: var(--accent); letter-spacing: 0.08em; margin-top: 6px; text-align: center; padding: 0 12px;
+    }
+    .about-left { display: flex; flex-direction: column; align-items: flex-start; gap: 36px; }
+
+    /* PROJECT GALLERY */
+    .project-gallery {
+      margin-bottom: 18px; border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--border); position: relative;
+    }
+    .gallery-track {
+      display: flex; transition: transform 0.4s ease;
+    }
+    .gallery-img {
+      min-width: 100%; height: 180px; object-fit: cover; display: block;
+      background: var(--surface2);
+    }
+    .gallery-placeholder {
+      min-width: 100%; height: 180px;
+      background: var(--surface2);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+      border: 1px dashed rgba(0,229,255,0.2);
+    }
+    .gallery-placeholder span:first-child { font-size: 2rem; opacity: 0.4; }
+    .gallery-placeholder span:last-child {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+      color: var(--muted); letter-spacing: 0.08em;
+    }
+    .gallery-nav {
+      position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 6px;
+    }
+    .gallery-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.3); cursor: pointer; transition: background 0.2s;
+      border: none; padding: 0;
+    }
+    .gallery-dot.active { background: var(--accent); }
+    .gallery-arrows {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 100%; display: flex; justify-content: space-between; padding: 0 8px;
+      pointer-events: none;
+    }
+    .gallery-btn {
+      pointer-events: all; background: rgba(6,8,16,0.7); border: 1px solid var(--border);
+      color: var(--text); width: 28px; height: 28px; border-radius: 50%;
+      cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .gallery-btn:hover { border-color: var(--accent); color: var(--accent); }
+
     /* MOBILE */
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
@@ -497,7 +577,7 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="mailto:gayururamanayake@gmail.com" class="nav-cta">Hire Me</a>
+    <a href="/cdn-cgi/l/email-protection#1473756d616661667579757a756d757f71547379757d783a777b79" class="nav-cta">Hire Me</a>
   </nav>
 
   <!-- HERO -->
@@ -512,20 +592,7 @@
         <a href="#contact" class="btn-secondary">Let's Connect</a>
       </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">3.69<span>/4</span></div>
-        <div class="stat-label">CGPA</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">6<span>+</span></div>
-        <div class="stat-label">Projects</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">1<span>st</span></div>
-        <div class="stat-label">Maze Solver 2025</div>
-      </div>
-    </div>
+
     <div class="scroll-indicator">
       <div class="scroll-line"></div>
       <div class="scroll-text">scroll</div>
@@ -538,7 +605,18 @@
       <div class="section-tag">Introduction</div>
       <h2 class="section-title">About <span class="dim">Me</span></h2>
       <div class="about-grid">
-        <div class="about-text reveal">
+        <div class="about-left reveal">
+          <!-- PHOTO: Replace "photo.jpg" with your actual image filename -->
+          <!-- To use: put your photo in the same folder as index.html, rename it photo.jpg -->
+          <div class="about-photo-wrap" id="photoWrap">
+            <!-- Uncomment the line below and replace photo.jpg with your image filename -->
+            <img src="photo.jpeg" alt="Gayuru Ramanayake" class="about-photo" onerror="this.style.display='none';document.getElementById('photoFallback').style.display='flex'">
+            <div class="about-photo-placeholder" id="photoFallback">
+              <span>👤</span>
+              <span>Add photo.jpg here</span>
+            </div>
+          </div>
+          <div class="about-text">
           <p>I'm an enthusiastic final-year <strong>Electrical Engineering</strong> undergraduate at the University of Moratuwa, Sri Lanka, with a CGPA of 3.69 and two Dean's List recognitions including a <strong>perfect 4.0 GPA</strong> in Semester 6.</p>
           <p>Recently completed a <strong>6-month AI/ML internship at Jaseci Labs</strong>, where I contributed to vision-language model fine-tuning, backend architecture, and cloud deployment using Docker &amp; Kubernetes.</p>
           <p>Alongside engineering, I'm pursuing <strong>CIMA</strong> (Management Level) to bridge technology with strategic business thinking. I believe the best solutions live at the intersection of deep technical knowledge and business awareness.</p>
@@ -546,6 +624,7 @@
             <a href="https://github.com/GayuruRamanayake" class="about-link" target="_blank">⌥ GitHub</a>
             <a href="https://www.linkedin.com/in/gayuru-ramanayake-5141532a5/" class="about-link" target="_blank">⌘ LinkedIn</a>
             <a href="mailto:gayururamanayake@gmail.com" class="about-link">✉ Email</a>
+          </div>
           </div>
         </div>
         <div class="about-card-group reveal">
@@ -645,6 +724,21 @@
       <div class="projects-grid">
         <div class="project-card reveal">
           <div class="project-badge">Ongoing</div>
+          <!-- GALLERY: Replace vlm1.jpg, vlm2.jpg etc with your actual image filenames -->
+          <div class="project-gallery" id="gallery-vlm">
+            <div class="gallery-track" id="track-vlm">
+              <!-- Uncomment & replace filenames when you have images:
+              <img src="vlm1.jpg" class="gallery-img" alt="VLM Project">
+              <img src="vlm2.jpg" class="gallery-img" alt="VLM Project">
+              -->
+              <div class="gallery-placeholder"><span>🤖</span><span>Add vlm1.jpg, vlm2.jpg</span></div>
+            </div>
+            <div class="gallery-arrows">
+              <button class="gallery-btn" onclick="slideGallery('vlm',-1)">‹</button>
+              <button class="gallery-btn" onclick="slideGallery('vlm',1)">›</button>
+            </div>
+            <div class="gallery-nav" id="dots-vlm"></div>
+          </div>
           <div class="project-num">01 / Final Year Research</div>
           <div class="project-title">VLM-Powered Intelligent Assistance System for Visually Impaired</div>
           <div class="project-desc">Real-time assistive navigation system using Vision-Language Models on NVIDIA Jetson for semantic scene understanding, obstacle awareness, and audio feedback for independent mobility.</div>
@@ -655,6 +749,22 @@
 
         <div class="project-card reveal">
           <div class="project-badge green">🏆 1st Place</div>
+          <!-- GALLERY: Replace maze1.jpg, maze2.jpg etc with your actual image filenames -->
+          <div class="project-gallery" id="gallery-maze">
+            <div class="gallery-track" id="track-maze">
+              <!-- Uncomment & replace filenames when you have images:
+              <img src="maze1.jpg" class="gallery-img" alt="Maze Robot">
+              <img src="maze2.jpg" class="gallery-img" alt="Maze Robot">
+              <img src="maze3.jpg" class="gallery-img" alt="Maze Robot">
+              -->
+              <div class="gallery-placeholder"><span>🤖</span><span>Add maze1.jpg, maze2.jpg, maze3.jpg</span></div>
+            </div>
+            <div class="gallery-arrows">
+              <button class="gallery-btn" onclick="slideGallery('maze',-1)">‹</button>
+              <button class="gallery-btn" onclick="slideGallery('maze',1)">›</button>
+            </div>
+            <div class="gallery-nav" id="dots-maze"></div>
+          </div>
           <div class="project-num">02 / Competition Winner</div>
           <div class="project-title">Autonomous Maze Solving Robot</div>
           <div class="project-desc">Champion at Maze Solver Challenge 2025. Hybrid navigation using Flood Fill + BFS, dual-mode PID control, custom 3D-printed chassis, and real-time environment mapping with ultrasonic/IR sensors.</div>
@@ -782,11 +892,11 @@
         <div class="contact-info reveal">
           <p>I'm currently open to internships, full-time roles, and collaborative projects in AI/ML, robotics, and full-stack engineering. Let's build something great together.</p>
           <div class="contact-items">
-            <a href="mailto:gayururamanayake@gmail.com" class="contact-item">
+            <a href="/cdn-cgi/l/email-protection#0463657d717671766569656a657d656f61446369656d682a676b69" class="contact-item">
               <div class="contact-icon">✉</div>
               <div>
                 <div class="contact-label">Email</div>
-                <div class="contact-val">gayururamanayake@gmail.com</div>
+                <div class="contact-val"><span class="__cf_email__" data-cfemail="3255534b47404740535f535c534b53595772555f535b5e1c515d5f">[email&#160;protected]</span></div>
               </div>
             </a>
             <a href="tel:+94719306109" class="contact-item">
@@ -843,7 +953,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Custom cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
@@ -874,6 +984,42 @@
       btn.style.background = '#00e5ff';
       setTimeout(() => { btn.textContent = 'Send Message →'; e.target.reset(); }, 3000);
     }
+
+    // Gallery logic
+    const galleryState = {};
+    function initGallery(id) {
+      const track = document.getElementById('track-' + id);
+      if (!track) return;
+      const slides = Array.from(track.children).filter(c => !c.classList.contains('gallery-placeholder') || track.children.length === 1);
+      const count = track.children.length;
+      galleryState[id] = { index: 0, count };
+      const dotsContainer = document.getElementById('dots-' + id);
+      if (dotsContainer && count > 1) {
+        for (let i = 0; i < count; i++) {
+          const d = document.createElement('button');
+          d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+          d.onclick = () => goToSlide(id, i);
+          dotsContainer.appendChild(d);
+        }
+      }
+    }
+    function goToSlide(id, index) {
+      const state = galleryState[id];
+      if (!state) return;
+      state.index = (index + state.count) % state.count;
+      const track = document.getElementById('track-' + id);
+      track.style.transform = 'translateX(-' + (state.index * 100) + '%)';
+      document.querySelectorAll('#dots-' + id + ' .gallery-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === state.index);
+      });
+    }
+    function slideGallery(id, dir) {
+      const state = galleryState[id];
+      if (!state) return;
+      goToSlide(id, state.index + dir);
+    }
+    initGallery('vlm');
+    initGallery('maze');
   </script>
 </body>
 </html>
