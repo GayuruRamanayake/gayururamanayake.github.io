@@ -53,16 +53,7 @@
     .hero-name { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(3rem,5.5vw,5.5rem); line-height:1; color:var(--heading); letter-spacing:-2px; margin-bottom:12px; opacity:0; animation:fadeUp 0.8s 0.4s forwards; word-break:keep-all; overflow-wrap:normal; }
     .hero-name .accent { color:var(--accent); }
     .hero-title { font-family:'Syne',sans-serif; font-weight:600; font-size:clamp(1rem,1.8vw,1.35rem); color:var(--muted); margin-bottom:28px; opacity:0; animation:fadeUp 0.8s 0.6s forwards; }
-    
-    /* NEW TWO-COLUMN HERO DESCRIPTION */
-    .hero-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 600px; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
-    .split-card { background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border: 1px solid var(--border); padding: 20px 24px; border-radius: 10px; transition: transform 0.3s, border-color 0.3s; }
-    .split-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-3px); }
-    .split-card.cima-card:hover { border-color: rgba(123,97,255,0.4); }
-    .split-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--heading); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-    .split-title .icon { font-size: 1.2rem; color: var(--accent); }
-    .split-card.cima-card .split-title .icon { color: var(--accent2); }
-    .split-desc { font-size: 0.88rem; line-height: 1.7; color: var(--text); margin: 0; }
+    .hero-desc { font-size:1rem; line-height:1.8; color:var(--text); max-width:560px; margin-bottom:40px; opacity:0; animation:fadeUp 0.8s 0.8s forwards; }
 
     .hero-btns { display:flex; gap:16px; flex-wrap:wrap; opacity:0; animation:fadeUp 0.8s 1s forwards; }
     .btn-primary { font-family:'JetBrains Mono',monospace; font-size:0.78rem; background:var(--accent); color:var(--bg); padding:14px 32px; border-radius:4px; text-decoration:none; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; transition:all 0.2s; box-shadow:0 0 30px rgba(0,229,255,0.3); }
@@ -97,16 +88,50 @@
       pointer-events:none;
     }
 
-    /* STATS ROW */
-    .hero-stats { 
-      display:flex; justify-content:space-between; align-items:center; width:100%; 
-      max-width:1050px; 
-      margin:20px auto 40px; z-index:2; 
-      opacity:0; animation:fadeUp 0.8s 1.2s forwards;
+    /* ── NEW SPLIT STATS SECTION ── */
+    .hero-stats-split { 
+      display: grid; 
+      grid-template-columns: 1.2fr 0.8fr; 
+      gap: 24px; 
+      width: 100%; 
+      max-width: 1100px; 
+      margin: 40px auto 40px; 
+      z-index: 2; 
+      opacity: 0; 
+      animation: fadeUp 0.8s 1.2s forwards; 
     }
-    .stat-item { display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; }
-    .stat-num { font-family:'Syne',sans-serif; font-weight:800; font-size:3rem; color:var(--accent); line-height:1; }
-    .stat-label { font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--muted); letter-spacing:0.15em; text-transform:uppercase; }
+    .stats-panel { 
+      background: rgba(255,255,255,0.02); 
+      border: 1px solid var(--border); 
+      border-radius: 12px; 
+      padding: 24px 32px; 
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .stats-panel:hover { transform: translateY(-2px); border-color: rgba(0,229,255,0.3); }
+    .stats-panel.cima-panel:hover { border-color: rgba(123,97,255,0.4); }
+    
+    .panel-title { 
+      font-family: 'JetBrains Mono', monospace; 
+      font-size: 0.75rem; 
+      color: var(--accent); 
+      letter-spacing: 0.1em; 
+      text-transform: uppercase; 
+      margin-bottom: 24px; 
+      text-align: center; 
+      border-bottom: 1px solid rgba(0,229,255,0.2); 
+      padding-bottom: 12px; 
+    }
+    .stats-panel.cima-panel .panel-title { 
+      color: var(--accent2); 
+      border-color: rgba(123,97,255,0.2); 
+    }
+    
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .cima-grid { grid-template-columns: repeat(2, 1fr); }
+    
+    .stat-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+    .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.2rem; color: var(--heading); line-height: 1; }
+    .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
 
     .scroll-indicator { display:flex; flex-direction:column; align-items:center; gap:8px; z-index:2; opacity:0; animation:fadeUp 0.8s 1.5s forwards; margin-top: auto; }
     .scroll-line { width:1px; height:60px; background:linear-gradient(to bottom,var(--accent),transparent); animation:scrollPulse 2s ease-in-out infinite; }
@@ -333,17 +358,14 @@
       .hero-content { max-width:100%; width:100%; }
       .hero-tag { justify-content:center; }
       .hero-name { font-size:clamp(1.9rem,8vw,3.2rem); letter-spacing:-0.5px; word-break:normal; white-space:normal; }
-      
-      /* Mobile override for the new split layout */
-      .hero-split { grid-template-columns: 1fr; gap: 16px; text-align: left; }
-      
       .hero-btns { justify-content:center; }
       
       .hero-photo-wrap { width:280px; height:340px; }
       .hero-photo { transform: translateX(0); }
       
-      .hero-stats { flex-wrap:wrap; justify-content:center; gap:30px; margin-top:10px; padding-bottom:40px; }
-      .stat-item { width:40%; min-width: 130px; }
+      /* Mobile override for the new split layout */
+      .hero-stats-split { grid-template-columns: 1fr; gap: 16px; margin: 10px auto 40px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
 
       .container { padding-left:24px; padding-right:24px; }
       .about-grid,.skills-layout,.contact-grid { grid-template-columns:1fr; gap:40px; }
@@ -396,18 +418,7 @@
         <div class="hero-tag">Available for opportunities</div>
         <h1 class="hero-name">Gayuru<br><span class="accent">Ramanayake</span></h1>
         <div class="hero-title">Electrical Engineering Undergraduate &amp; AI/ML Engineer</div>
-        
-        <div class="hero-split">
-          <div class="split-card">
-            <div class="split-title"><span class="icon">⚡</span> Engineering & AI</div>
-            <p class="split-desc">Final-year Electrical Engineering undergraduate at UoM. Specializing in AI, robotics, and bridging hardware with software.</p>
-          </div>
-          <div class="split-card cima-card">
-            <div class="split-title"><span class="icon">📊</span> Business & Strategy</div>
-            <p class="split-desc">Holder of CIMA Adv Dip MA, currently reading for the Strategic Level. Combining technical innovation with strategic financial acumen.</p>
-          </div>
-        </div>
-
+        <p class="hero-desc">Final-year Electrical Engineering undergraduate at the University of Moratuwa, bridging hardware, software, and strategic business management. I focus on engineering intelligent AI solutions while leveraging my CIMA background to drive structural business value.</p>
         <div class="hero-btns">
           <a href="#projects" class="btn-primary">View My Work</a>
           <a href="cv.pdf" class="btn-cv" target="_blank" download="Gayuru_Ramanayake_CV">&#8595; Download CV</a>
@@ -425,26 +436,41 @@
       </div>
     </div>
 
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">3.69</div>
-        <div class="stat-label">CGPA / 4.0</div>
+    <div class="hero-stats-split">
+      <div class="stats-panel">
+        <div class="panel-title">Engineering &amp; Technology</div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-num">3.69</div>
+            <div class="stat-label">CGPA / 4.0</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">2&times;</div>
+            <div class="stat-label">Dean's List</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">1st</div>
+            <div class="stat-label">Maze Solver</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">6mo</div>
+            <div class="stat-label">AI/ML Intern</div>
+          </div>
+        </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">CIMA</div>
-        <div class="stat-label">Management Level</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">2&times;</div>
-        <div class="stat-label">Dean's List</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">1st</div>
-        <div class="stat-label">Maze Solver 2025</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">6mo</div>
-        <div class="stat-label">AI/ML Internship</div>
+
+      <div class="stats-panel cima-panel">
+        <div class="panel-title">Finance &amp; Strategy</div>
+        <div class="stats-grid cima-grid">
+          <div class="stat-item">
+            <div class="stat-num">Adv Dip</div>
+            <div class="stat-label">Management Accounting</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">Reading</div>
+            <div class="stat-label">Strategic Level</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -471,7 +497,7 @@
           <div class="about-text">
             <p>I'm an enthusiastic final-year <strong>Electrical Engineering</strong> undergraduate at the University of Moratuwa, Sri Lanka, with a CGPA of 3.69 and two Dean's List recognitions including a <strong>perfect 4.0 GPA</strong> in Semester 6.</p>
             <p>Recently completed a <strong>6-month AI/ML internship at Jaseci Labs</strong>, where I contributed to vision-language model fine-tuning, backend architecture, and cloud deployment using Docker &amp; Kubernetes.</p>
-            <p>Alongside engineering, I have successfully completed the <strong>CIMA Management Level</strong>, enabling me to bridge technology with strategic business thinking. I believe the best solutions live at the intersection of deep technical knowledge and business awareness.</p>
+            <p>Alongside engineering, I hold the <strong>CIMA Advanced Diploma in Management Accounting</strong> and am currently reading for my Strategic Level. I believe the best solutions live at the intersection of deep technical knowledge and strategic business awareness.</p>
             <div class="about-links">
               <a href="https://github.com/GayuruRamanayake" class="about-link" target="_blank">GitHub</a>
               <a href="https://www.linkedin.com/in/gayuru-ramanayake-5141532a5/" class="about-link" target="_blank">LinkedIn</a>
@@ -484,7 +510,7 @@
         <div class="about-card-group reveal">
           <div class="info-card"><div class="info-card-label">Location</div><div class="info-card-value">Pallewela, Sri Lanka</div><div class="info-card-sub">Open to remote / relocation</div></div>
           <div class="info-card"><div class="info-card-label">Current Status</div><div class="info-card-value">Final-Year Undergraduate</div><div class="info-card-sub">University of Moratuwa · 2022 – present</div></div>
-          <div class="info-card"><div class="info-card-label">Focus Areas</div><div class="info-card-value">AI/ML · Robotics · DevOps · Automation · Management</div><div class="info-card-sub">Vision-Language Models, Embedded Systems</div></div>
+          <div class="info-card"><div class="info-card-label">Focus Areas</div><div class="info-card-value">AI/ML · Robotics · DevOps · Automation · Strategy</div><div class="info-card-sub">Vision-Language Models, Embedded Systems</div></div>
           <div class="info-card"><div class="info-card-label">Languages</div><div class="info-card-value">English · Sinhala (Native)</div></div>
         </div>
 
@@ -520,8 +546,8 @@
           <div class="edu-icon">📊</div>
           <div class="edu-degree">CIMA – Chartered Institute of Management Accountants</div>
           <div class="edu-inst">CIMA Global</div>
-          <div class="edu-year">Management Level Completed</div>
-          <div class="edu-detail">Advanced Diploma in Management Accounting (Management Level Passed) · Operational Level ✓</div>
+          <div class="edu-year">CIMA Advanced Diploma in Management Accounting (CIMA Adv Dip MA)</div>
+          <div class="edu-detail">Reading for Strategic Level · Management Level Passed · Operational Level Completed</div>
           <span class="badge">Credential ID: 1-6AIHZSZ</span>
         </div>
 
