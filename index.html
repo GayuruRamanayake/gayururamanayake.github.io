@@ -45,7 +45,6 @@
     /* ── HERO ── */
     #hero { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:120px 60px 40px; overflow:hidden; gap:40px; }
     
-    /* Increased gap from 40px to 60px to give text and photo more room */
     .hero-main { display:flex; align-items:center; justify-content:space-between; width:100%; max-width:1200px; gap:60px; position:relative; z-index:2; }
     
     .hero-content { max-width:600px; }
@@ -74,7 +73,6 @@
       object-fit:contain; object-position:bottom center;
       display:block;
       filter: drop-shadow(0 0 50px rgba(0,229,255,0.25));
-      /* Shifted image explicitly to the right to stop letter cutoff */
       transform: translateX(40px);
     }
     .hero-photo-placeholder {
@@ -93,7 +91,8 @@
     /* STATS ROW */
     .hero-stats { 
       display:flex; justify-content:space-between; align-items:center; width:100%; 
-      max-width:900px; margin:20px auto 40px; z-index:2; 
+      max-width:1050px; /* Widened slightly to perfectly fit 5 items */
+      margin:20px auto 40px; z-index:2; 
       opacity:0; animation:fadeUp 0.8s 1.2s forwards;
     }
     .stat-item { display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; }
@@ -328,7 +327,6 @@
       .hero-btns { justify-content:center; }
       
       .hero-photo-wrap { width:280px; height:340px; }
-      /* Reset the image shift on mobile to keep it perfectly centered */
       .hero-photo { transform: translateX(0); }
       
       .hero-stats { flex-wrap:wrap; justify-content:center; gap:30px; margin-top:10px; padding-bottom:40px; }
@@ -409,6 +407,10 @@
         <div class="stat-label">CGPA / 4.0</div>
       </div>
       <div class="stat-item">
+        <div class="stat-num">CIMA</div>
+        <div class="stat-label">Management Level</div>
+      </div>
+      <div class="stat-item">
         <div class="stat-num">2&times;</div>
         <div class="stat-label">Dean's List</div>
       </div>
@@ -445,7 +447,7 @@
           <div class="about-text">
             <p>I'm an enthusiastic final-year <strong>Electrical Engineering</strong> undergraduate at the University of Moratuwa, Sri Lanka, with a CGPA of 3.69 and two Dean's List recognitions including a <strong>perfect 4.0 GPA</strong> in Semester 6.</p>
             <p>Recently completed a <strong>6-month AI/ML internship at Jaseci Labs</strong>, where I contributed to vision-language model fine-tuning, backend architecture, and cloud deployment using Docker &amp; Kubernetes.</p>
-            <p>Alongside engineering, I'm pursuing <strong>CIMA</strong> (Management Level) to bridge technology with strategic business thinking. I believe the best solutions live at the intersection of deep technical knowledge and business awareness.</p>
+            <p>Alongside engineering, I have successfully completed the <strong>CIMA Management Level</strong>, enabling me to bridge technology with strategic business thinking. I believe the best solutions live at the intersection of deep technical knowledge and business awareness.</p>
             <div class="about-links">
               <a href="https://github.com/GayuruRamanayake" class="about-link" target="_blank">GitHub</a>
               <a href="https://www.linkedin.com/in/gayuru-ramanayake-5141532a5/" class="about-link" target="_blank">LinkedIn</a>
@@ -489,7 +491,16 @@
       </div>
       <div class="edu-grid">
         <div class="edu-card reveal"><div class="edu-icon">🎓</div><div class="edu-degree">B.Sc Engineering (Hons) – Electrical Engineering</div><div class="edu-inst">University of Moratuwa</div><div class="edu-year">2022 – present</div><div class="edu-detail">CGPA: 3.69 / 4.00</div><span class="badge">Dean's List: Sem 4 &amp; Sem 6 (4.0/4.0)</span></div>
-        <div class="edu-card reveal"><div class="edu-icon">📊</div><div class="edu-degree">CIMA – Chartered Institute of Management Accountants</div><div class="edu-inst">CIMA Global</div><div class="edu-year">Reading Management Level</div><div class="edu-detail">Diploma in Management Accounting (Operational Level ✓) · Certificate Level ✓</div><span class="badge">Credential ID: 1-6AIHZSZ</span></div>
+        
+        <div class="edu-card reveal">
+          <div class="edu-icon">📊</div>
+          <div class="edu-degree">CIMA – Chartered Institute of Management Accountants</div>
+          <div class="edu-inst">CIMA Global</div>
+          <div class="edu-year">Management Level Completed</div>
+          <div class="edu-detail">Advanced Diploma in Management Accounting (Management Level Passed) · Operational Level ✓</div>
+          <span class="badge">Credential ID: 1-6AIHZSZ</span>
+        </div>
+
         <div class="edu-card reveal"><div class="edu-icon">📐</div><div class="edu-degree">GCE Advanced Level</div><div class="edu-inst">Bandaranayake College, Gampaha</div><div class="edu-year">2020</div><div class="edu-detail">Mathematics – A | Physics – A | Chemistry – A</div><span class="badge">Z-score: 2.2172</span></div>
         <div class="edu-card reveal"><div class="edu-icon">🏫</div><div class="edu-degree">GCE Ordinary Level</div><div class="edu-inst">Bandaranayake College, Gampaha</div><div class="edu-year">2017</div><div class="edu-detail">9A passes across all subjects</div><span class="badge">9A's</span></div>
       </div>
@@ -678,7 +689,7 @@
                 <div style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--muted);margin-top:5px;">Code: HHQO9XshHA</div>
               </a>
               <div class="cert-item">
-                <div class="cert-name">Certificate in Business Accounting</div>
+                <div class="cert-name">Advanced Diploma in Management Accounting</div>
                 <div class="cert-issuer">CIMA</div>
               </div>
             </div>
