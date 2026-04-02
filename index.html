@@ -53,8 +53,17 @@
     .hero-name { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(3rem,5.5vw,5.5rem); line-height:1; color:var(--heading); letter-spacing:-2px; margin-bottom:12px; opacity:0; animation:fadeUp 0.8s 0.4s forwards; word-break:keep-all; overflow-wrap:normal; }
     .hero-name .accent { color:var(--accent); }
     .hero-title { font-family:'Syne',sans-serif; font-weight:600; font-size:clamp(1rem,1.8vw,1.35rem); color:var(--muted); margin-bottom:28px; opacity:0; animation:fadeUp 0.8s 0.6s forwards; }
-    .hero-desc { font-size:1rem; line-height:1.8; color:var(--text); max-width:520px; margin-bottom:48px; opacity:0; animation:fadeUp 0.8s 0.8s forwards; }
     
+    /* NEW TWO-COLUMN HERO DESCRIPTION */
+    .hero-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 600px; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
+    .split-card { background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border: 1px solid var(--border); padding: 20px 24px; border-radius: 10px; transition: transform 0.3s, border-color 0.3s; }
+    .split-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-3px); }
+    .split-card.cima-card:hover { border-color: rgba(123,97,255,0.4); }
+    .split-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--heading); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .split-title .icon { font-size: 1.2rem; color: var(--accent); }
+    .split-card.cima-card .split-title .icon { color: var(--accent2); }
+    .split-desc { font-size: 0.88rem; line-height: 1.7; color: var(--text); margin: 0; }
+
     .hero-btns { display:flex; gap:16px; flex-wrap:wrap; opacity:0; animation:fadeUp 0.8s 1s forwards; }
     .btn-primary { font-family:'JetBrains Mono',monospace; font-size:0.78rem; background:var(--accent); color:var(--bg); padding:14px 32px; border-radius:4px; text-decoration:none; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; transition:all 0.2s; box-shadow:0 0 30px rgba(0,229,255,0.3); }
     .btn-primary:hover { transform:translateY(-2px); box-shadow:0 0 50px rgba(0,229,255,0.5); }
@@ -91,7 +100,7 @@
     /* STATS ROW */
     .hero-stats { 
       display:flex; justify-content:space-between; align-items:center; width:100%; 
-      max-width:1050px; /* Widened slightly to perfectly fit 5 items */
+      max-width:1050px; 
       margin:20px auto 40px; z-index:2; 
       opacity:0; animation:fadeUp 0.8s 1.2s forwards;
     }
@@ -324,6 +333,10 @@
       .hero-content { max-width:100%; width:100%; }
       .hero-tag { justify-content:center; }
       .hero-name { font-size:clamp(1.9rem,8vw,3.2rem); letter-spacing:-0.5px; word-break:normal; white-space:normal; }
+      
+      /* Mobile override for the new split layout */
+      .hero-split { grid-template-columns: 1fr; gap: 16px; text-align: left; }
+      
       .hero-btns { justify-content:center; }
       
       .hero-photo-wrap { width:280px; height:340px; }
@@ -383,7 +396,18 @@
         <div class="hero-tag">Available for opportunities</div>
         <h1 class="hero-name">Gayuru<br><span class="accent">Ramanayake</span></h1>
         <div class="hero-title">Electrical Engineering Undergraduate &amp; AI/ML Engineer</div>
-        <p class="hero-desc">Final-year Electrical Engineering undergraduate at the University of Moratuwa, specializing in AI, robotics, and data-driven systems. I focus on bridging hardware and software to engineer intelligent solutions—from fine-tuning vision-language models to developing award-winning autonomous robotic systems.</p>
+        
+        <div class="hero-split">
+          <div class="split-card">
+            <div class="split-title"><span class="icon">⚡</span> Engineering & AI</div>
+            <p class="split-desc">Final-year Electrical Engineering undergraduate at UoM. Specializing in AI, robotics, and bridging hardware with software.</p>
+          </div>
+          <div class="split-card cima-card">
+            <div class="split-title"><span class="icon">📊</span> Business & Strategy</div>
+            <p class="split-desc">Holder of CIMA Adv Dip MA, currently reading for the Strategic Level. Combining technical innovation with strategic financial acumen.</p>
+          </div>
+        </div>
+
         <div class="hero-btns">
           <a href="#projects" class="btn-primary">View My Work</a>
           <a href="cv.pdf" class="btn-cv" target="_blank" download="Gayuru_Ramanayake_CV">&#8595; Download CV</a>
