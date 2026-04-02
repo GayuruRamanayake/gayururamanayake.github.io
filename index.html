@@ -116,21 +116,25 @@
       color: var(--accent); 
       letter-spacing: 0.1em; 
       text-transform: uppercase; 
-      margin-bottom: 24px; 
       text-align: center; 
-      border-bottom: 1px solid rgba(0,229,255,0.2); 
-      padding-bottom: 12px; 
+      margin-bottom: 6px;
     }
-    .stats-panel.cima-panel .panel-title { 
-      color: var(--accent2); 
-      border-color: rgba(123,97,255,0.2); 
+    .panel-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
+    .stats-panel.cima-panel .panel-title { color: var(--accent2); }
     
     .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .cima-grid { grid-template-columns: repeat(2, 1fr); }
+    .cima-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
     
     .stat-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
-    .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.2rem; color: var(--heading); line-height: 1; }
+    .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2rem; color: var(--heading); line-height: 1; }
     .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
 
     .scroll-indicator { display:flex; flex-direction:column; align-items:center; gap:8px; z-index:2; opacity:0; animation:fadeUp 0.8s 1.5s forwards; margin-top: auto; }
@@ -224,7 +228,7 @@
     .edu-icon { font-size:1.6rem; margin-bottom:16px; }
     .edu-degree { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--heading); margin-bottom:6px; }
     .edu-inst { font-size:0.88rem; color:var(--accent); margin-bottom:4px; }
-    .edu-year { font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--muted); }
+    .edu-year { font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--muted); font-weight: 500; }
     .edu-detail { font-size:0.83rem; color:var(--muted); margin-top:10px; line-height:1.6; }
     .badge { display:inline-block; margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:0.62rem; background:rgba(0,229,255,0.1); color:var(--accent); border:1px solid rgba(0,229,255,0.25); padding:3px 10px; border-radius:20px; }
 
@@ -418,7 +422,9 @@
         <div class="hero-tag">Available for opportunities</div>
         <h1 class="hero-name">Gayuru<br><span class="accent">Ramanayake</span></h1>
         <div class="hero-title">Electrical Engineering Undergraduate &amp; AI/ML Engineer</div>
-        <p class="hero-desc">Final-year Electrical Engineering undergraduate at the University of Moratuwa, bridging hardware, software, and strategic business management. I focus on engineering intelligent AI solutions while leveraging my CIMA background to drive structural business value.</p>
+        
+        <p class="hero-desc">I am a final-year Electrical Engineering undergraduate at the University of Moratuwa and a CIMA Advanced Diploma holder. I specialize in bridging the gap between cutting-edge AI, robotics, and strategic business management. My passion lies in engineering intelligent, data-driven solutions that push technical boundaries while delivering real-world structural business value.</p>
+        
         <div class="hero-btns">
           <a href="#projects" class="btn-primary">View My Work</a>
           <a href="cv.pdf" class="btn-cv" target="_blank" download="Gayuru_Ramanayake_CV">&#8595; Download CV</a>
@@ -437,8 +443,10 @@
     </div>
 
     <div class="hero-stats-split">
+      
       <div class="stats-panel">
         <div class="panel-title">Engineering &amp; Technology</div>
+        <div class="panel-subtitle">B.Sc. Electrical Engineering, UoM</div>
         <div class="stats-grid">
           <div class="stat-item">
             <div class="stat-num">3.69</div>
@@ -461,17 +469,19 @@
 
       <div class="stats-panel cima-panel">
         <div class="panel-title">Finance &amp; Strategy</div>
+        <div class="panel-subtitle">Chartered Institute of Management Accountants</div>
         <div class="stats-grid cima-grid">
           <div class="stat-item">
             <div class="stat-num">Adv Dip</div>
-            <div class="stat-label">Management Accounting</div>
+            <div class="stat-label">CIMA MA Qualified</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">Reading</div>
-            <div class="stat-label">Strategic Level</div>
+            <div class="stat-num">Strategic</div>
+            <div class="stat-label">Level Candidate</div>
           </div>
         </div>
       </div>
+
     </div>
 
     <div class="scroll-indicator">
@@ -546,8 +556,8 @@
           <div class="edu-icon">📊</div>
           <div class="edu-degree">CIMA – Chartered Institute of Management Accountants</div>
           <div class="edu-inst">CIMA Global</div>
-          <div class="edu-year">CIMA Advanced Diploma in Management Accounting (CIMA Adv Dip MA)</div>
-          <div class="edu-detail">Reading for Strategic Level · Management Level Passed · Operational Level Completed</div>
+          <div class="edu-year">Reading for CIMA Strategic Level</div>
+          <div class="edu-detail">Advanced Diploma in Management Accounting (Adv Dip MA) · Operational Level Completed</div>
           <span class="badge">Credential ID: 1-6AIHZSZ</span>
         </div>
 
